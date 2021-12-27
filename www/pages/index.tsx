@@ -1,7 +1,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 
-import { Fragment, h, Head, tw } from "../deps.ts";
+import { Fragment, h, Head, tw, IS_BROWSER, useState } from "../deps.ts";
 
 export default function MainPage() {
   return (
@@ -13,7 +13,29 @@ export default function MainPage() {
       <NavigationBar active="/" />
       <Intro />
       <GettingStarted />
+      <Counter />
     </>
+  );
+}
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>{count}</p>
+      <button
+        onClick={() => setCount(count - 1)}
+        disabled={!IS_BROWSER}
+      >
+        -1
+      </button>
+      <button
+        onClick={() => setCount(count + 1)}
+        disabled={!IS_BROWSER}
+      >
+        +1
+      </button>
+    </div>
   );
 }
 
